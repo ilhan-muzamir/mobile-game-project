@@ -12,6 +12,11 @@ public class Player_Controller : MonoBehaviour
     private bool isFacingRight = true;
     private bool isWalking;
     private bool isIdle;
+
+    private bool isGrounded = true;
+    public float jumpForce = 5.0f;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,11 +70,26 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("ground"))
+        {
+            isGrounded = true;
+        }
+    }
+
     void Update()
     {
         MovePlayer();
         MovementDirection();
         AnimationController();
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) 
+        { 
+            rb.velocity = Vector2.up * jumpForce;
+            isGrounded = false;
+            anim.SetInteger("Animation", 2);
+        }
     }
 
     //public void walk()
