@@ -22,7 +22,7 @@ public class BombScript : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("ground"))
+        if (collision.gameObject.CompareTag("ground")|| collision.gameObject.CompareTag("Player"))
         {
             Destroy(gameObject);
 

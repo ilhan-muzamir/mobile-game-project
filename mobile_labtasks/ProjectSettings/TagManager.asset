@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - ground
+  - missile
   layers:
   - Default
   - TransparentFX

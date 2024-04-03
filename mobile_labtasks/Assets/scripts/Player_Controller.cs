@@ -6,7 +6,7 @@ public class Player_Controller : MonoBehaviour
 {
     private Rigidbody2D rb;
     public Animator anim;
-    public float playerSpeed = 5.0f;
+    public float playerSpeed = 20.0f;
     public float horizontalInput;
 
     private bool isFacingRight = true;
@@ -15,6 +15,9 @@ public class Player_Controller : MonoBehaviour
 
     private bool isGrounded = true;
     public float jumpForce = 5.0f;
+    public int coinsum;
+    public GameObject pop_up_dead;
+    public GameObject pop_up_win;
 
 
     // Start is called before the first frame update
@@ -76,8 +79,27 @@ public class Player_Controller : MonoBehaviour
         {
             isGrounded = true;
         }
-    }
 
+        if (collision.gameObject.CompareTag("Coin"))
+        {
+            Destroy(collision.gameObject);
+            coinsum++;
+        }
+
+        if (collision.gameObject.CompareTag("missile"))
+        {
+
+            pop_up_dead.SetActive(true);
+            Debug.Log("Dieded");
+            Destroy(collision.gameObject);
+        }
+
+        if (coinsum >= 10)
+        {
+            pop_up_win.SetActive(true);
+            Debug.Log("Player Won");
+        }
+    }
     void Update()
     {
         MovePlayer();
@@ -92,6 +114,10 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
+   
+
+
+
     //public void walk()
     //{
     //    anim.SetInteger("Animation", 1);
@@ -105,6 +131,6 @@ public class Player_Controller : MonoBehaviour
     //public void jump()
     //{
     //    anim.SetInteger("Animation", 2);
-    //}
+    //}
 
 }
