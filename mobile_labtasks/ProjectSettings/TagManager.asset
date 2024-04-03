@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ground
   - missile
+  - Coin
   layers:
   - Default
   - TransparentFX

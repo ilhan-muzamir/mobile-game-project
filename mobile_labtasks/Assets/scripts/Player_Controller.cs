@@ -19,12 +19,17 @@ public class Player_Controller : MonoBehaviour
     public GameObject pop_up_dead;
     public GameObject pop_up_win;
 
+    public int curHealth = 0;
+    public int maxHealth = 100;
+
 
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+
+        curHealth = maxHealth;
     }
 
     private void MovePlayer()
@@ -73,6 +78,7 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
+   
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("ground"))
@@ -88,10 +94,10 @@ public class Player_Controller : MonoBehaviour
 
         if (collision.gameObject.CompareTag("missile"))
         {
-
-            pop_up_dead.SetActive(true);
-            Debug.Log("Dieded");
-            Destroy(collision.gameObject);
+            DamagePlayer(10);
+            //pop_up_dead.SetActive(true);
+            //Debug.Log("Dieded");
+            //Destroy(collision.gameObject);
         }
 
         if (coinsum >= 10)
@@ -112,6 +118,11 @@ public class Player_Controller : MonoBehaviour
             isGrounded = false;
             anim.SetInteger("Animation", 2);
         }
+    }
+
+    public void DamagePlayer(int damage)
+    {
+        curHealth -= damage;
     }
 
    
